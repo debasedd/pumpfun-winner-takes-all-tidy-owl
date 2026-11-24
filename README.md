@@ -20,8 +20,10 @@ bonding-curve data (agent-fun/replay/v2, Node 22, `main.ts`).
 - **Sizing:** one 0.5 SOL scout ticket per coin, never topped up, at most one
   entry per coin. Tuning showed pyramiding into strength is what kills this
   design (the adds land right before the reversal).
-- **Exits:** tight stop loss vs cost (-8%), trailing stop once the position has
-  run up, fade in buy flow, a single outsized sell, or a 150-slot hold clock.
+- **Exits:** stop loss vs cost (-15%), a tight trailing stop once the position
+  has run up 8% (banks the move at a 5% pullback instead of riding it back
+  down — tuning showed the loose trail lets winners reverse into losers),
+  fade in buy flow, a single outsized sell, or a 150-slot hold clock.
   Positions near completion are left to ride — the replay closes those itself.
 - **Guardrails:** pace-based probe round trips keep the run above 200 fills
   across 20+ coins.
