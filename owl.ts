@@ -436,6 +436,7 @@ export function makeOwlBot(cfg: OwlConfig = OWL_DEFAULT): Bot {
         const capSol = Math.floor(Number(state.maxBuyLamports(mint))) / LAMPORTS;
         let amount = Math.min(capSol, ticket, cfg.maxBookSol - booked);
         if (amount > free - tx) amount = free - tx;
+        if (!Number.isFinite(amount)) continue; // degenerate reserves: skip, never crash
         if (amount < cfg.floorBuySol) continue;
         const lamports = BigInt(Math.floor(amount * LAMPORTS));
         orders.push({ side: 'buy', mint, quote_lamports: lamports, max_slippage_bps: cfg.slipBps });
